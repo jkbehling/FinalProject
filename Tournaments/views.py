@@ -4,20 +4,21 @@ from django.http import HttpResponse
 # Create your views here.
 
 def indexPageView(request) :
-    return HttpResponse("Welcome to the main page.")
+    return render(request, 'tournaments/index.html')
+    #return HttpResponse("Hi")
 
 def createLeagueView(request) :
-    return HttpResponse("This page is to create a league.")
+    return render(request, 'tournaments/index.html')
 
 def updateGamesView(request) :
-    return HttpResponse("This page is to update games.")
+    return render(request, 'tournaments/index.html')
 
 def rankingsView(request) :
-    return HttpResponse("This page is to view rankings.")
+    return render(request, 'tournaments/index.html')
 
 def teamInfoView(request) :
-    return HttpResponse("This page is to view team info.")
+    return render(request, 'tournaments/index.html')
 
 def generateTourneyView(request) :
-    return HttpResponse("This page is to generate a tournament.")
+    return render(request, 'tournaments/index.html')
 
