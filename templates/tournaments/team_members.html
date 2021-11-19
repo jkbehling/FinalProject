@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- Masthead-->
+        <header>
+
+        <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-black">
+                            <!-- Page heading-->
+                            <h1 style= "color: black";>Teams</h1>
+                            
+                        </div>
+                        <br><br>
+                        {{ team.team_name }}
+                        <br><br>
+                        <div class="container">
+                            {% for i in player %}
+                            <p>
+                                {{ i.first_name }}
+                                {{ i.last_name }}
+                                &emsp;Skill: {{ i.skill_level }}
+                            </p>
+                            {% endfor %}
+                        <br></br>
+                        <a class="btn btn-primary" href="{% url 'add_member' team_id=team.id %}">Add Team Members</a>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+           
+        </header>
+       
+{% endblock %}
