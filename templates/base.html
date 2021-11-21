@@ -20,7 +20,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Homepage</a>
+                <a class="navbar-brand" href="{% url 'index' %}">Homepage</a>
                 <a class="btn btn-primary" href="{% url 'info' %}">View Teams</a>
                 <a class="btn btn-primary" href="{% url 'generate' %}">Create Tournament</a>
             </div>
@@ -34,8 +34,11 @@
     {% endblock %}
 
  <!-- Footer-->
-        <footer style="position: fixed; bottom: 0px; width: 100%; height: 60px">
-            <div class="container">
+        <br></br>
+        <br></br>
+        <br></br>
+        <footer style="bottom: 0px; width: 100%; height: 60px">
+            <div class="footer bg-light">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">

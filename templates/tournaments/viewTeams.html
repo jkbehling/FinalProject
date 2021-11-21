@@ -15,11 +15,15 @@
                         <div class="container">
                             {% for i in team %}
                             <p>
-                                
-                                <h1>{{ i.team_name }}
+                                <div class="row">
+                                <div class="col">
+                                <h2>{{ i.team_name }}
+                                </div>
+                                <div class="col">
                                 <a class="btn btn-primary" href="{% url 'team_members' team_id=i.id %}">View Team Members</a>
-                                <a class="btn btn-primary" href="{% url 'team_members' team_id=i.id %}">Edit Team Members</a>
-                                </h1>
+                                </div>
+                                </h2>
+                                </div>
                             </p>
                             {% endfor %}
                         </div>

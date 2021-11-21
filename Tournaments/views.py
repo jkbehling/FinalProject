@@ -45,6 +45,28 @@ def addTeamMember(request, team_id) :
         "player" : playerData,
         "team" : teamData
     }
-    return render(request, 'tournaments/add_member.html', context)
+    if request.method == 'POST' :
+        player = Player()
+
+        player.first_name = request.POST['first_name']
+        player.last_name = request.POST['last_name']
+        player.skill_level = request.POST['skill']
+
+        player.save()
+
+        teamData.team_player.add(player)
+
+        return teamMembersView(request, team_id)
+
+    else :
+        return render(request, 'tournaments/add_member.html', context)
+
+def removeTeamPlayer(request, team_id, team_player_id) :
+    teamData = Team.objects.get(id = team_id)
+    playerData = teamData.team_player.get(id = team_player_id)
+    
+    playerData.delete()
+
+    return teamMembersView(request, team_id)
 
 
