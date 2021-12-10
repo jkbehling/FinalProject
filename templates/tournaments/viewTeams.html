@@ -20,12 +20,20 @@
                                 <h2>{{ i.team_name }}
                                 </div>
                                 <div class="col">
-                                <a class="btn btn-primary" href="{% url 'team_members' team_id=i.id %}">View Team Members</a>
+                                    <a class="btn btn-primary" href="{% url 'team_members' team_id=i.id %}">View Team Members</a>
+                                </div>
+                                <div class = "col">
+                                    <a class="btn btn-primary" style="background-color: red; border-color:red" href="{% url 'delete_team' team_id=i.id %}" onclick="return confirm('Are you sure you want to delete {{i.team_name}}?');">Delete Team</a>
                                 </div>
                                 </h2>
                                 </div>
                             </p>
                             {% endfor %}
+                            <div class="col">
+                                <div class="row">
+                                    <a class="btn btn-primary" href="{% url 'add_team' %}">Add a Team</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

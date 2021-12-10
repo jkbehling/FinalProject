@@ -29,7 +29,7 @@
                                 Skill: {{ i.skill_level }}
                             </div>
                             <div class="col">
-                            <a class="btn btn-primary" style="background-color: red; border-color:red" href="{% url 'removeTeamPlayer' team_id=team.id team_player_id=i.id %}">Remove</a>
+                            <a class="btn btn-primary" style="background-color: red; border-color:red" href="{% url 'removeTeamPlayer' team_id=team.id team_player_id=i.id %}" onclick="return confirm('Are you sure you want to delete {{i.first_name}} {{i.last_name}}?');">Remove</a>
                             </div>
                             </div>
                             <br></br>

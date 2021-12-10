@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+        <header>
+
+        <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-black">
+                            <!-- Page heading-->
+                            <h1 style= "color: black";>Add team</h1>
+                            
+                        </div>
+                        <br><br>
+                        <br><br>
+                        <div class="row">
+                        <form name="form" method="post"  action="{% url 'create_team' %}">
+                            {% csrf_token %}
+                                <div class="col">
+                                    <input class="form-control form-control-lg" id="team_name" type="text" name="team_name" placeholder="Team Name"/>
+                                </div>
+                                <div class="col">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                </div>        
+                        </form>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+           
+        </header>
+       
+{% endblock %}

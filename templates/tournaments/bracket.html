@@ -1,0 +1,581 @@
+{% extends 'base2.html' %}
+{% block content %}
+        <!-- Masthead-->
+        <header>
+
+        <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-black">
+                            <!-- Page heading-->
+                            <h1 style= "color: black";>{{tourneyName}}</h1>
+                            
+                            
+                            
+                        </div>
+                        <br><br>
+                        
+                        <div class="container row justify-content-center">
+                          
+                            <table class="table-condensed" style="width:80%">
+
+                                <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                              {% ifequal record.0.wins record.1.wins %}
+                                <a href="{% url 'advance' tournament_id=record.0.tournament_id id=record.0.id %}">{{record.0.team}}</a>
+                              {% else %}
+                                <p>{{record.0.team}}</p>
+                              {% endifequal %}
+                            </div>
+                            </td>
+                            
+                            
+                            <td class="col-md-2" rowspan="2" style="padding:0px; position:relative; min-width:50px;">
+                            <div style="border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;"></div>
+                            <div style="border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;"></div>
+                            <div style="border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;"></div>
+                            </td>
+                            
+                            
+                            
+                            
+                            <td class="col-md-5" rowspan="2">
+                            
+                            
+                            
+                             <div class="input-group">
+                            {% ifequal record.0.losses 0 %}
+                              {% if record.0.wins > 1 %}
+                              <p>{{record.0.team}}</p>
+                              {% endif %}
+                              {% ifequal record.0.wins 1 %}
+                                {% if record.2.wins > 1 or record.3.wins > 1 %}
+                                  <p>{{record.0.team}}</p>
+                                {% endif %}
+                                {% if record.2.wins < 2 and record.3.wins < 2 %}
+                                  <a href="{% url 'advance' tournament_id=tourneyID id=record.0.id %}">{{record.0.team}}</a>
+                                {% endif %}
+                              {% endifequal %}
+                            {% endifequal %}
+
+                            {% ifequal record.1.losses 0 %}
+                              {% if record.1.wins > 1 %}
+                              <p>{{record.1.team}}</p>
+                              {% endif %}
+                              {% ifequal record.1.wins 1 %}
+                                {% if record.2.wins > 1 or record.3.wins > 1 %}
+                                  <p>{{record.1.team}}</p>
+                                {% endif %}
+                                {% if record.2.wins < 2 and record.3.wins < 2 %}
+                                  <a href="{% url 'advance' tournament_id=tourneyID id=record.1.id %}">{{record.1.team}}</a>
+                                {% endif %}
+                              {% endifequal %}
+                            {% endifequal %}
+                            
+                            
+                            
+                            
+                            
+                            </td><td class='col-md-2' rowspan='4' style='padding:0px; position:relative; min-width:50px;'>
+                            <div style='border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;'></div>
+                            <div style='border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;'></div>
+                            <div style='border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;'></div>
+                            </td> <td class="col-md-5" rowspan="4">
+                            
+                            
+                            
+                              <div class="input-group">
+                                
+                                
+                                {% ifequal record.0.wins 2 %}
+                                {% if record.4.wins > 2 or  record.5.wins > 2 or record.6.wins > 2 or record.7.wins > 2 %}
+                                <p>{{record.0.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.0.id %}">{{record.0.team}}</a>
+                                {% endif %}                                
+                                {% endifequal %}
+                                {% if record.0.wins > 2 %}
+                                <p>{{record.0.team}}</p>
+                                {% endif %}
+
+                                
+
+                                {% ifequal record.1.wins 2 %}
+                                {% if record.4.wins > 2 or  record.5.wins > 2 or record.6.wins > 2 or record.7.wins > 2 %}
+                                <p>{{record.1.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.1.id %}">{{record.1.team}}</a>
+                                {% endif %}                                 
+                                {% endifequal %}
+                                {% if record.1.wins > 2 %}
+                                <p>{{record.1.team}}</p>
+                                {% endif %}
+
+                                {% ifequal record.2.wins 2 %}
+                                {% if record.4.wins > 2 or  record.5.wins > 2 or record.6.wins > 2 or record.7.wins > 2 %}
+                                <p>{{record.2.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.2.id %}">{{record.2.team}}</a>
+                                {% endif %}                                 
+                                {% endifequal %}
+                                {% if record.2.wins > 2 %}
+                                <p>{{record.2.team}}</p>
+                                {% endif %}
+
+                                {% ifequal record.3.wins 2 %}
+                                {% if record.4.wins > 2 or  record.5.wins > 2 or record.6.wins > 2 or record.7.wins > 2 %}
+                                <p>{{record.3.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.3.id %}">{{record.3.team}}</a>
+                                {% endif %}                                 
+                                {% endifequal %}
+                                {% if record.3.wins > 2 %}
+                                <p>{{record.3.team}}</p>
+                                {% endif %}
+                              </div>
+                            
+                            
+                            
+                               </td><td class="col-md-2" rowspan="8" style="padding:0px; position:relative; min-width:50px;">
+                            <div style="border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;"></div>
+                            <div style="border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;"></div>
+                            <div style="border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;"></div>
+                            </td> <td class="col-md-2" rowspan="8">
+                            
+                              
+                            
+                            
+                                <div class="input-group">
+                                  
+                                 
+                                {% if record.0.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.0.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.0.team}}</button>
+                                </form>
+                                {% endif %}
+                                {% if record.1.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.1.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.1.team}}</button>
+                                </form>
+                                {% endif %}
+                                {% if record.2.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.2.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.2.team}}</button>
+                                </form>
+                                {% endif %}
+                                {% if record.3.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.3.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.3.team}}</button>
+                                </form>
+                                {% endif %}
+                                {% if record.4.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.4.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.4.team}}</button>
+                                </form>
+
+                                
+                                {% endif %}
+                                {% if record.5.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.5.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.5.team}}</button>
+                                </form>
+                                {% endif %}
+                                {% if record.6.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.6.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.6.team}}</button>
+                                </form>
+                                {% endif %}
+                                {% if record.7.wins > 2 %}
+                                <form method="Post" action="{% url 'results' %}">
+                                  {% csrf_token %}
+                                  <input type="hidden" id="tourneyID" name="tourneyID" value="{{record.7.tournament_id}}">
+                                  <button class="btn btn-primary" id="submitButton" type="submit" >{{record.7.team}}</button>
+                                </form>
+
+                                {% endif %}                         
+
+                                
+                              </div>
+                              
+                            
+                            
+                            </div>
+                            
+                            </td>      </tr>
+                            
+                            
+                            <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                            
+                              {% ifequal record.0.wins record.1.wins %}
+                                <a href="{% url 'advance' tournament_id=record.1.tournament_id id=record.1.id %}">{{record.1.team}}</a>
+                              {% else %}
+                                <p>{{record.1.team}}</p>
+                              {% endifequal %}
+
+                            
+                            
+                            
+                              </div>
+                            </td>
+                            
+                            
+                            
+                            </tr>
+                            
+                            
+                            
+                            
+                              <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                              {% ifequal record.2.wins record.3.wins %}
+                                <a href="{% url 'advance' tournament_id=record.2.tournament_id id=record.2.id %}">{{record.2.team}}</a>
+                              {% else %}
+                                <p>{{record.2.team}}</p>
+                              {% endifequal %}
+                            
+                            </div>
+                            </td>
+                            
+                            
+                            <td class="col-md-2" rowspan="2" style="padding:0px; position:relative; min-width:50px;">
+                            <div style="border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;"></div>
+                            <div style="border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;"></div>
+                            <div style="border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;"></div>
+                            </td>
+                            
+                            
+                            
+                            
+                            <td class="col-md-5" rowspan="2">
+                            
+                            
+                            <div class="input-group">
+                            
+                              {% ifequal record.2.losses 0 %}
+                                {% if record.2.wins > 1 %}
+                                <p>{{record.2.team}}</p>
+                                {% endif %}
+                                {% ifequal record.2.wins 1 %}
+                                  {% if record.0.wins > 1 or record.1.wins > 1 %}
+                                    <p>{{record.2.team}}</p>
+                                  {% endif %}
+                                  {% if record.0.wins < 2 and record.1.wins < 2 %}
+                                    <a href="{% url 'advance' tournament_id=tourneyID id=record.2.id %}">{{record.2.team}}</a>
+                                  {% endif %}
+                                {% endifequal %}
+                              {% endifequal %}
+
+                              {% ifequal record.3.losses 0 %}
+                                {% if record.3.wins > 1 %}
+                                <p>{{record.3.team}}</p>
+                                {% endif %}
+                                {% ifequal record.3.wins 1 %}
+                                  {% if record.0.wins > 1 or record.1.wins > 1 %}
+                                    <p>{{record.3.team}}</p>
+                                  {% endif %}
+                                  {% if record.0.wins < 2 and record.1.wins < 2 %}
+                                    <a href="{% url 'advance' tournament_id=tourneyID id=record.3.id %}">{{record.3.team}}</a>
+                                  {% endif %}
+                                {% endifequal %}
+                              {% endifequal %}
+                            
+                            
+                            
+                              </div>
+                            
+                            
+                            </td>      </tr>
+                            
+                            
+                            <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                            
+                              {% ifequal record.3.wins record.2.wins %}
+                                <a href="{% url 'advance' tournament_id=record.3.tournament_id id=record.3.id %}">{{record.3.team}}</a>
+                              {% else %}
+                                <p>{{record.3.team}}</p>
+                              {% endifequal %}
+                            
+                            
+                              </div>
+                            </td>
+                            
+                            
+                            
+                            </tr>
+                            
+                            
+                            
+                            
+                              <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                              {% ifequal record.4.wins record.5.wins %}
+                                <a href="{% url 'advance' tournament_id=record.4.tournament_id id=record.4.id %}">{{record.4.team}}</a>
+                              {% else %}
+                                <p>{{record.4.team}}</p>
+                              {% endifequal %}
+                            
+                            </div>
+                            </td>
+                            
+                            
+                            <td class="col-md-2" rowspan="2" style="padding:0px; position:relative; min-width:50px;">
+                            <div style="border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;"></div>
+                            <div style="border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;"></div>
+                            <div style="border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;"></div>
+                            </td>
+                            
+                            
+                            
+                            
+                            <td class="col-md-5" rowspan="2">
+                            
+                            
+                            
+                             <div class="input-group">
+                          
+                              {% ifequal record.4.losses 0 %}
+                                {% if record.4.wins > 1 %}
+                                <p>{{record.4.team}}</p>
+                                {% endif %}
+                                {% ifequal record.4.wins 1 %}
+                                  {% if record.6.wins > 1 or record.7.wins > 1 %}
+                                    <p>{{record.4.team}}</p>
+                                  {% endif %}
+                                  {% if record.6.wins < 2 and record.7.wins < 2 %}
+                                    <a href="{% url 'advance' tournament_id=tourneyID id=record.4.id %}">{{record.4.team}}</a>
+                                  {% endif %}
+                                {% endifequal %}
+                              {% endifequal %}
+
+                              {% ifequal record.5.losses 0 %}
+                                {% if record.5.wins > 1 %}
+                                <p>{{record.5.team}}</p>
+                                {% endif %}
+                                {% ifequal record.5.wins 1 %}
+                                  {% if record.6.wins > 1 or record.7.wins > 1 %}
+                                    <p>{{record.5.team}}</p>
+                                  {% endif %}
+                                  {% if record.6.wins < 2 and record.7.wins < 2 %}
+                                    <a href="{% url 'advance' tournament_id=tourneyID id=record.5.id %}">{{record.5.team}}</a>
+                                  {% endif %}
+                                {% endifequal %}
+                              {% endifequal %}
+                            
+                            
+                              </div>
+                            
+                            
+                            
+                            </td><td class='col-md-2' rowspan='4' style='padding:0px; position:relative; min-width:50px;'>
+                            <div style='border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;'></div>
+                            <div style='border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;'></div>
+                            <div style='border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;'></div>
+                            </td> <td class="col-md-5" rowspan="4">
+                            
+                              <div class="input-group">
+                                
+                                {% ifequal record.4.wins 2 %}
+                                {% if record.0.wins > 2 or  record.1.wins > 2 or record.2.wins > 2 or record.3.wins > 2 %}
+                                <p>{{record.4.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.4.id %}">{{record.4.team}}</a>
+                                {% endif %}
+                                {% endifequal %}
+                                {% if record.4.wins > 2 %}
+                                <p>{{record.4.team}}</p>
+                                {% endif %}
+
+                                {% ifequal record.5.wins 2 %}
+                                {% if record.0.wins > 2 or  record.1.wins > 2 or record.2.wins > 2 or record.3.wins > 2 %}
+                                <p>{{record.5.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.5.id %}">{{record.5.team}}</a>
+                                {% endif %}
+                                {% endifequal %}
+                                {% if record.5.wins > 2 %}
+                                <p>{{record.5.team}}</p>
+                                {% endif %}
+
+                                {% ifequal record.6.wins 2 %}
+                                {% if record.0.wins > 2 or  record.1.wins > 2 or record.2.wins > 2 or record.3.wins > 2 %}
+                                <p>{{record.6.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.6.id %}">{{record.6.team}}</a>
+                                {% endif %}
+                                {% endifequal %}
+                                {% if record.6.wins > 2 %}
+                                <p>{{record.6.team}}</p>
+                                {% endif %}
+
+                                {% ifequal record.7.wins 2 %}
+                                {% if record.0.wins > 2 or  record.1.wins > 2 or record.2.wins > 2 or record.3.wins > 2 %}
+                                <p>{{record.7.team}}</p>
+                                {% else %}
+                                <a href="{% url 'advance' tournament_id=tourneyID id=record.7.id %}">{{record.7.team}}</a>
+                                {% endif %}
+                                {% endifequal %}
+                                {% if record.7.wins > 2 %}
+                                <p>{{record.7.team}}</p>
+                                {% endif %}
+                            
+                              </div>
+                            
+                              </td>      </tr>
+                            
+                            
+                            <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                            
+                              {% ifequal record.5.wins record.4.wins %}
+                                <a href="{% url 'advance' tournament_id=record.5.tournament_id id=record.5.id %}">{{record.5.team}}</a>
+                              {% else %}
+                                <p>{{record.5.team}}</p>
+                              {% endifequal %}
+                            
+                            
+                            
+                              </div>
+                            </td>
+                            
+                            
+                            
+                            </tr>
+                            
+                            
+                            
+                            
+                              <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                              {% ifequal record.6.wins record.7.wins %}
+                                <a href="{% url 'advance' tournament_id=record.6.tournament_id id=record.6.id %}">{{record.6.team}}</a>
+                              {% else %}
+                                <p>{{record.6.team}}</p>
+                              {% endifequal %}
+                            
+                            </div>
+                            </td>
+                            
+                            
+                            <td class="col-md-2" rowspan="2" style="padding:0px; position:relative; min-width:50px;">
+                            <div style="border-top: 2px solid #090; border-right: 2px solid #090; width:80%; height:25%; float: left; position:absolute; top:25%;"></div>
+                            <div style="border-bottom: 2px solid #f00; border-right: 2px solid #f00; width:80%; height:25%; float: left; position:absolute; top:50%;"></div>
+                            <div style="border-top: 2px solid #090; width: 20%; margin-left: 80%; float: right; position:absolute;"></div>
+                            </td>
+                            
+                            
+                            
+                            
+                            <td class="col-md-5" rowspan="2">
+                            
+                            
+                            <div class="input-group">
+                              {% ifequal record.6.losses 0 %}
+                                {% if record.6.wins > 1 %}
+                                <p>{{record.6.team}}</p>
+                                {% endif %}
+                                {% ifequal record.6.wins 1 %}
+                                  {% if record.5.wins > 1 or record.4.wins > 1 %}
+                                    <p>{{record.6.team}}</p>
+                                  {% endif %}
+                                  {% if record.5.wins < 2 and record.4.wins < 2 %}
+                                    <a href="{% url 'advance' tournament_id=tourneyID id=record.6.id %}">{{record.6.team}}</a>
+                                  {% endif %}
+                                {% endifequal %}
+                              {% endifequal %}
+
+                              {% ifequal record.7.losses 0 %}
+                                {% if record.7.wins > 1 %}
+                                <p>{{record.7.team}}</p>
+                                {% endif %}
+                                {% ifequal record.7.wins 1 %}
+                                  {% if record.5.wins > 1 or record.4.wins > 1 %}
+                                    <p>{{record.7.team}}</p>
+                                  {% endif %}
+                                  {% if record.5.wins < 2 and record.4.wins < 2 %}
+                                    <a href="{% url 'advance' tournament_id=tourneyID id=record.7.id %}">{{record.7.team}}</a>
+                                  {% endif %}
+                                {% endifequal %}
+                              {% endifequal %}
+                            
+                            
+                            
+                            
+                            
+                            </td>      </tr>
+                            
+                            
+                            <tr>
+                            
+                            <td class="col-md-5">
+                            <div class="input-group">
+                            
+                              {% ifequal record.7.wins record.6.wins %}
+                                <a href="{% url 'advance' tournament_id=record.7.tournament_id id=record.7.id %}">{{record.7.team}}</a>
+                              {% else %}
+                                <p>{{record.7.team}}</p>
+                              {% endifequal %}
+                            
+                            
+                              </div>
+                            </td>
+                            
+                            
+                            
+                            </tr>
+                            
+                            
+                          </div> 
+
+                          
+
+                          </div> 
+
+                          {% for i in record %}
+                            {% if i.wins > 2%}
+                              <h5 class="text-center text-black">Click the winning team's name to save the results of this tournament.</h5>
+                            {% endif %}
+                          {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+            
+           
+        </header>
+       
+{% endblock %}

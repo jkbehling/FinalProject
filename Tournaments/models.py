@@ -16,8 +16,9 @@ class Player(models.Model):
 
 
 class Team(models.Model):
-    team_name = models.CharField(max_length=50)
+    team_name = models.CharField(max_length=50, unique=True)
     team_player = models.ManyToManyField('Player')
+    # tournaments = models.ManyToManyField('Tournament', through='TournamentTeam')
 
     def __str__(self):
         return (self.team_name)
@@ -34,12 +35,12 @@ class Tournament(models.Model):
 class TournamentTeam(models.Model) :
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-    placement = models.CharField(max_length=10)
+    round = models.IntegerField(default = 1)
     wins = models.IntegerField(default=0)
     losses = models.IntegerField(default=0)
 
     def __str__(self):
-        return '%s %s %s %i %i' %(self.team.team_name, self.tournament.tourney_name, self.placement, self.wins, self.losses)
+        return '%s %s %s %i %i' %(self.team.team_name, self.tournament.tourney_name, self.round, self.wins, self.losses)
 
 class Match(models.Model) :
     team = models.ForeignKey(TournamentTeam, on_delete=models.CASCADE)

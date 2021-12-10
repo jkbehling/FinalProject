@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from Tournaments.models import Team, Player
+from Tournaments.models import Team, Player, TournamentTeam, Tournament
+import random
 
 # Create your views here.
 
@@ -8,8 +9,81 @@ def indexPageView(request) :
     return render(request, 'tournaments/index.html')
     #return HttpResponse("Hi")
 
-def createLeagueView(request, name) :
-    return render(request, name, 'tournaments/index.html')
+def createLeagueView(request) :
+    
+    newTourney = Tournament()
+    tourneyName = request.POST['name']
+    newTourney.tourney_name = tourneyName
+    newTourney.num_teams = 8
+    newTourney.save()
+    #newTourneyTeam = TournamentTeam()
+    newTourneyTeam = Team.objects.get(id = request.POST['team1'])
+    
+    #  team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    # tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    # placement = models.CharField(max_length=10)
+    # wins = models.IntegerField(default=0)
+    # losses = models.IntegerField(default=0)
+    def createTournamentTeam(team, tournament):
+        newTournament = TournamentTeam()
+        newTournament.team = team
+        newTournament.tournament = tournament
+        newTournament.round = 1
+        newTournament.wins = 0
+        newTournament.losses = 0
+        newTournament.save()
+
+    
+    createTournamentTeam(newTourneyTeam, newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team2']), newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team3']), newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team4']), newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team5']), newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team6']), newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team7']), newTourney)
+    createTournamentTeam(Team.objects.get(id = request.POST['team8']), newTourney)
+    
+    newTourney.save()
+
+    # teams = [
+    #     Team.objects.get(id = request.POST.get('team1')),
+    #     Team.objects.get(id = request.POST.get('team2')),
+    #     Team.objects.get(id = request.POST.get('team3')),
+    #     Team.objects.get(id = request.POST.get('team4')),
+    #     Team.objects.get(id = request.POST.get('team5')),
+    #     Team.objects.get(id = request.POST.get('team6')),
+    #     Team.objects.get(id = request.POST.get('team7')),
+    #     Team.objects.get(id = request.POST.get('team8')),
+    # ]
+
+    # random.shuffle(teams)
+
+    tourneyData = newTourney.tournament_teams.all()
+    tourneyID = newTourney.id
+    record = TournamentTeam.objects.filter(tournament_id=tourneyID)
+    
+
+
+
+    context = {
+        "teams": tourneyData,
+        "tourneyID": tourneyID,
+        "record": record,
+        "tourneyName": tourneyName,
+    }
+        
+    return render(request, 'tournaments/bracket.html', context)
+        
+
+def bracketView(request) :
+    
+    bracketData = Tournament.objects.all()
+
+    context = {
+        "bracket" : bracketData,
+    }
+    
+    return render(request, 'tournaments/bracketView.html', context)
 
 def updateGamesView(request) :
     return render(request, 'tournaments/index.html')
@@ -36,7 +110,11 @@ def teamMembersView(request, team_id) :
 
 
 def generateTourneyView(request) :
-    return render(request, 'tournaments/generateTourney.html')
+    teamData = Team.objects.all()
+    context = {
+        "team": teamData
+    }
+    return render(request, 'tournaments/generateTourney.html', context)
 
 def addTeamMember(request, team_id) :
     teamData = Team.objects.get(id = team_id)
@@ -69,4 +147,53 @@ def removeTeamPlayer(request, team_id, team_player_id) :
 
     return teamMembersView(request, team_id)
 
+def addTeamViews(request) :
 
+    return render(request, 'tournaments/add_team.html')
+
+def createTeam(request) :
+    teamName = request.POST['team_name']
+    newTeam = Team()
+    newTeam.team_name = teamName
+    newTeam.save()
+
+    teamData = Team.objects.get(id = newTeam.id)
+    context = {
+        "team" : teamData
+    }
+
+    return render(request, 'tournaments/add_member.html', context)
+
+def deleteTeam(request, team_id) :
+    teamData = Team.objects.get(id=team_id)
+    teamData.delete()
+
+    data = Team.objects.all()
+    context = {
+        "team" : data
+    }
+    return render(request, 'tournaments/viewTeams.html', context)
+
+def advanceTeam(request, tournament_id, id) :
+    currentTourney = TournamentTeam.objects.filter(tournament_id=tournament_id)
+    currentTeam = TournamentTeam.objects.get(id=id)
+    currentTeam.wins += 1
+    currentTeam.round += 1
+    currentTeam.save()
+    tourneyName = Tournament.objects.get(id=tournament_id)
+    
+    currentID = tournament_id
+    context = {
+        "record" : currentTourney,
+        "tourneyID": currentID,
+        "tourneyName": tourneyName
+    }
+    return render(request, 'tournaments/bracket.html', context)
+
+def TournamentResultsView(request) :
+    tournament = TournamentTeam.objects.filter(tournament=request.POST.get("tourneyID")).order_by("-wins")
+
+    context = {
+        "tournament": tournament
+    }
+    return render(request, 'tournaments/results.html', context)

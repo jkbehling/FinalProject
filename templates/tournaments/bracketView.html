@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<header>
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <div class="text-center text-black">
+                    <!-- Page heading-->
+                    <h1 style= "color: black";>Tournaments</h1>
+                    <h4>Search for the results of past tournaments here</h4><br><br>
+                    <!-- {% for x in bracket %}
+                        {{ x.tourney_name }}
+                    {% endfor %} -->
+
+                    <form method="Post" action="{% url 'results' %}">
+                        {% csrf_token %}
+                        <div class = "row">
+                            
+                            <label for="tourney_name">Name of Tournament:</label>
+                            <select name="tourneyID" id="tourneyID">
+                                <optgroup label="Tournament Name">
+                                    <option value="tourneyID">Select Tournament Name</option>
+                                    {% for i in bracket %}
+                                        <option value="{{i.id}}">{{i.tourney_name}}</option>
+                                    {% endfor %}
+                                </select><br><br><p></p><p></p>
+                                <button class="btn btn-primary" id="submitButton" type="submit" >Submit</button>
+                    </form>
+                   
+                    
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </div>
+    <div>
+    </header>
+
+{% endblock %}
