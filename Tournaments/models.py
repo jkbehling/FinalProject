@@ -42,6 +42,7 @@ class TournamentTeam(models.Model) :
     def __str__(self):
         return '%s %s %s %i %i' %(self.team.team_name, self.tournament.tourney_name, self.round, self.wins, self.losses)
 
+#We didn't end up using this class, but I left it because we might impliment it in the future.
 class Match(models.Model) :
     team = models.ForeignKey(TournamentTeam, on_delete=models.CASCADE)
     result = models.CharField(max_length=1)

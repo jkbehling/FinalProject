@@ -9,9 +9,7 @@
                     <!-- Page heading-->
                     <h1 style= "color: black";>Tournaments</h1>
                     <h4>Search for the results of past tournaments here</h4><br><br>
-                    <!-- {% for x in bracket %}
-                        {{ x.tourney_name }}
-                    {% endfor %} -->
+                    
 
                     <form method="Post" action="{% url 'results' %}">
                         {% csrf_token %}

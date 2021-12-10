@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from Tournaments.models import Team, Player, TournamentTeam, Tournament
-import random
 
 # Create your views here.
 
 def indexPageView(request) :
     return render(request, 'tournaments/index.html')
-    #return HttpResponse("Hi")
 
 def createLeagueView(request) :
     
@@ -16,14 +14,10 @@ def createLeagueView(request) :
     newTourney.tourney_name = tourneyName
     newTourney.num_teams = 8
     newTourney.save()
-    #newTourneyTeam = TournamentTeam()
+    
     newTourneyTeam = Team.objects.get(id = request.POST['team1'])
     
-    #  team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    # tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-    # placement = models.CharField(max_length=10)
-    # wins = models.IntegerField(default=0)
-    # losses = models.IntegerField(default=0)
+    
     def createTournamentTeam(team, tournament):
         newTournament = TournamentTeam()
         newTournament.team = team
@@ -45,18 +39,6 @@ def createLeagueView(request) :
     
     newTourney.save()
 
-    # teams = [
-    #     Team.objects.get(id = request.POST.get('team1')),
-    #     Team.objects.get(id = request.POST.get('team2')),
-    #     Team.objects.get(id = request.POST.get('team3')),
-    #     Team.objects.get(id = request.POST.get('team4')),
-    #     Team.objects.get(id = request.POST.get('team5')),
-    #     Team.objects.get(id = request.POST.get('team6')),
-    #     Team.objects.get(id = request.POST.get('team7')),
-    #     Team.objects.get(id = request.POST.get('team8')),
-    # ]
-
-    # random.shuffle(teams)
 
     tourneyData = newTourney.tournament_teams.all()
     tourneyID = newTourney.id
